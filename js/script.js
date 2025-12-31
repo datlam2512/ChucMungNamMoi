@@ -990,20 +990,16 @@ let giftStarted = false;
 appNodes.soundBtn.addEventListener("click", () => {
 	if (!giftStarted) {
 		giftStarted = true;
-
-		// 🔥 QUAN TRỌNG: bật âm thanh NGAY
-		enableSound();   // hoặc audio.play()
-
+		// Bật pháo nếu đang tạm dừng
 		togglePause(false);
-
+		// Đảm bảo autoLaunch được bật
 		store.setState({
-			config: {
-				...store.state.config,
+			config: Object.assign({}, store.state.config, {
 				autoLaunch: true,
-			},
+			}),
 		});
-
 		configDidUpdate();
+		// Bắt đầu lời chúc bay
 		startWishesLoop();
 	} else {
 		toggleSound();
